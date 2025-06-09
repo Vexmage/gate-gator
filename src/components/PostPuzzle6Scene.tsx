@@ -1,5 +1,3 @@
-// src/components/PostPuzzle6Scene.tsx
-
 interface Props {
   isGregFriend: boolean | null;
   onContinue: () => void;
@@ -15,16 +13,13 @@ const PostPuzzle6Scene = ({ isGregFriend, onContinue }: Props) => {
       {isGregFriend ? (
         <>
           <p className="max-w-xl">
-            A hologram flickers to life. GREG’s face beams with pride — or at least, the algorithmic
-            equivalent.
+            A hologram flickers to life. GREG’s face beams with pride — or at least, the algorithmic equivalent.
           </p>
           <p className="max-w-xl">
-            <span className="italic text-lime-400">“You’ve done it. Even I struggled with that one when I was but a core script.”</span>
+            <span className="italic text-lime-400">
+              “You’ve done it. Even I struggled with that one when I was but a core script.”
+            </span>
           </p>
-          <p className="max-w-xl">
-            He gestures toward the far end of the chamber, where a portal now pulses with soft blue light.
-          </p>
-          <p className="max-w-xl italic text-lime-400">“Return now, friend, to the hall. The deeper logic awaits you there.”</p>
         </>
       ) : (
         <>
@@ -32,16 +27,36 @@ const PostPuzzle6Scene = ({ isGregFriend, onContinue }: Props) => {
             The chamber dims, and a portal pulses open at the far end. A neutral voice issues from the wall.
           </p>
           <p className="max-w-xl italic text-lime-400">
-            “Return through the portal to the hall. Further trials lie ahead.”
+            “Return to the hall. Deeper logic now unfolds.”
           </p>
         </>
       )}
+
+      <p className="max-w-xl">
+        You step through the portal and find yourself once more in the long, curved hallway. The hum of machinery fills the air.
+      </p>
+
+      <p className="max-w-xl">
+        A low rumble shakes the corridor as <span className="text-lime-400 italic">Door B</span> shudders, then hisses open. The runes once static now glow with motion—shifting, alive.
+      </p>
+
+      {isGregFriend && (
+        <p className="max-w-xl">
+          <span className="italic text-lime-400">
+            “Ah... now the <em>interesting</em> puzzles begin. I hope you like surprises.”
+          </span>
+        </p>
+      )}
+
+      <p className="max-w-xl text-sm text-gray-400 italic">
+        You may now access Door B in the hallway. Door A no longer responds.
+      </p>
 
       <button
         onClick={onContinue}
         className="mt-6 px-6 py-2 border-2 border-lime-400 bg-green-800 text-black font-bold rounded-sm hover:bg-green-600 transition-all"
       >
-        Enter the Portal
+        Return to Hallway
       </button>
     </div>
   );

@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-const PostPuzzle2Scene = ({ onChoosePath }: { onChoosePath: (path: string) => void }) => {
+interface Props {
+  onChoosePath: (path: string) => void;
+  doorBUnlocked: boolean;
+}
+
+const PostPuzzle2Scene = ({ onChoosePath, doorBUnlocked }: Props) => {
   const [showOptions, setShowOptions] = useState(false);
 
   return (
@@ -27,28 +32,66 @@ const PostPuzzle2Scene = ({ onChoosePath }: { onChoosePath: (path: string) => vo
 
         {showOptions && (
           <div className="space-y-4 mt-6 text-left bg-gray-950 p-4 border border-lime-400 rounded-sm">
+
+            {/* Door A — disabled if Door B is unlocked */}
             <div>
-              <p><strong className="text-lime-400">🟩 Door A – Logic Lock</strong></p>
-              <p>A shimmering glyph pulses with logic flow. Likely another puzzle awaits.</p>
-              <button
-                onClick={() => onChoosePath("logic")}
-                className="mt-2 px-4 py-1 border border-lime-400 bg-green-800 text-black rounded-sm hover:bg-green-600"
-              >
-                Enter Door A
-              </button>
+              <p>
+                <strong className="text-lime-400">🟩 Door A – Logic Lock</strong>
+              </p>
+              {doorBUnlocked ? (
+                <>
+                  <p className="text-gray-400">You’ve already completed this puzzle.</p>
+                  <button
+                    disabled
+                    className="mt-2 px-4 py-1 border border-gray-600 bg-gray-800 text-gray-500 rounded-sm cursor-not-allowed"
+                  >
+                    Completed
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p>A shimmering glyph pulses with logic flow. Likely another puzzle awaits.</p>
+                  <button
+                    onClick={() => onChoosePath("logic")}
+                    className="mt-2 px-4 py-1 border border-lime-400 bg-green-800 text-black rounded-sm hover:bg-green-600"
+                  >
+                    Enter Door A
+                  </button>
+                </>
+              )}
             </div>
 
+            {/* Door B — shown either locked or unlocked */}
             <div>
-              <p><strong className="text-lime-400">🟨 Door B – Unknown Symbol</strong></p>
-              <p>The door is marked with unfamiliar runes and emits a low hum. It may not respond to logic...</p>
-              <button
-                onClick={() => onChoosePath("unknown")}
-                className="mt-2 px-4 py-1 border border-lime-400 bg-yellow-700 text-black rounded-sm hover:bg-yellow-600"
-              >
-                Approach Door B
-              </button>
+              <p>
+                <strong className="text-lime-400">
+                  {doorBUnlocked ? "🟨 Door B – Unsealed" : "🟨 Door B – Unknown Symbol"}
+                </strong>
+              </p>
+              {doorBUnlocked ? (
+                <>
+                  <p>The glyphs shimmer and part, revealing a passage beyond. A deeper puzzle calls.</p>
+                  <button
+                    onClick={() => onChoosePath("unknown")}
+                    className="mt-2 px-4 py-1 border border-lime-400 bg-yellow-700 text-black rounded-sm hover:bg-yellow-600"
+                  >
+                    Enter Door B
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p>The door is marked with unfamiliar runes and emits a low hum. It appears to be locked from some external mechanism.</p>
+                  <button
+                    disabled
+                    className="mt-2 px-4 py-1 border border-gray-600 bg-gray-800 text-gray-500 rounded-sm cursor-not-allowed"
+                  >
+                    Locked
+                  </button>
+                </>
+              )}
             </div>
 
+            {/* Door C — always locked */}
             <div>
               <p><strong className="text-lime-400">🔒 Door C – Locked</strong></p>
               <p>A heavy hatch sealed with a physical key mechanism. No keypad. No puzzle.</p>

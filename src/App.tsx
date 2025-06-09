@@ -35,37 +35,29 @@ function App() {
     | "postPuzzle5"
     | "puzzle6"
     | "postPuzzle6"
-    | "logicPath"
+    | "unknownPath"
   >("introScreen");
 
   const [isGregFriend, setIsGregFriend] = useState<boolean | null>(null);
+  const [doorBUnlocked, setDoorBUnlocked] = useState(false);
 
   const handleNotationSelect = (chosen: "symbolic" | "electronic") => {
     setNotation(chosen);
     setStage("intro");
   };
 
-  const goToPuzzle = () => setStage("puzzle1");
-
   return (
     <>
       {stage === "introScreen" && (
-        <IntroScreen
-          onStart={() => setStage("select")}
-          onAbout={() => setStage("about")}
-        />
+        <IntroScreen onStart={() => setStage("select")} onAbout={() => setStage("about")} />
       )}
 
-      {stage === "about" && (
-        <AboutPage onContinue={() => setStage("select")} />
-      )}
+      {stage === "about" && <AboutPage onContinue={() => setStage("select")} />}
 
-      {stage === "select" && (
-        <NotationSelector onSelect={handleNotationSelect} />
-      )}
+      {stage === "select" && <NotationSelector onSelect={handleNotationSelect} />}
 
       {stage === "intro" && notation && (
-        <IntroSequence onContinue={goToPuzzle} notation={notation} />
+        <IntroSequence onContinue={() => setStage("puzzle1")} notation={notation} />
       )}
 
       {stage === "puzzle1" && (
@@ -85,8 +77,14 @@ function App() {
 
       {stage === "postPuzzle2" && (
         <PostPuzzle2Scene
+          doorBUnlocked={doorBUnlocked}
           onChoosePath={(path) => {
-            if (path === "logic") setStage("puzzle3");
+            if (path === "logic") {
+              if (doorBUnlocked) return; // logic path already done
+              setStage("puzzle3");
+            } else if (path === "unknown" && doorBUnlocked) {
+              setStage("unknownPath");
+            }
           }}
         />
       )}
@@ -106,17 +104,13 @@ function App() {
         <GatePuzzle4 onSolve={() => setStage("postPuzzle4")} notation={notation!} />
       )}
 
-      {stage === "postPuzzle4" && (
-        <PostPuzzle4Scene onContinue={() => setStage("puzzle5")} />
-      )}
+      {stage === "postPuzzle4" && <PostPuzzle4Scene onContinue={() => setStage("puzzle5")} />}
 
       {stage === "puzzle5" && (
         <GatePuzzle5 onSolve={() => setStage("postPuzzle5")} notation={notation!} />
       )}
 
-      {stage === "postPuzzle5" && (
-        <PostPuzzle5Scene onContinue={() => setStage("puzzle6")} />
-      )}
+      {stage === "postPuzzle5" && <PostPuzzle5Scene onContinue={() => setStage("puzzle6")} />}
 
       {stage === "puzzle6" && (
         <GatePuzzle6 onSolve={() => setStage("postPuzzle6")} notation={notation!} />
@@ -125,13 +119,16 @@ function App() {
       {stage === "postPuzzle6" && (
         <PostPuzzle6Scene
           isGregFriend={isGregFriend}
-          onContinue={() => setStage("logicPath")}
+          onContinue={() => {
+            setDoorBUnlocked(true);
+            setStage("postPuzzle2");
+          }}
         />
       )}
 
-      {stage === "logicPath" && (
-        <div className="min-h-screen bg-black text-lime-300 flex items-center justify-center font-mono p-8 text-center">
-          <p>Welcome to the deeper logic path... (coming soon)</p>
+      {stage === "unknownPath" && (
+        <div className="min-h-screen bg-black text-yellow-300 flex items-center justify-center font-mono p-8 text-center">
+          <p>You step through Door B... something shifts in the air. (Next puzzles coming soon)</p>
         </div>
       )}
     </>
