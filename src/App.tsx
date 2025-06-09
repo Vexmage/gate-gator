@@ -7,22 +7,28 @@ import GatePuzzle2 from "./components/GatePuzzle2";
 import PostPuzzle2Scene from "./components/PostPuzzle2Scene";
 import GatePuzzle3 from "./components/GatePuzzle3";
 import PostPuzzle3Scene from "./components/PostPuzzle3Scene";
+import GatePuzzle4 from "./components/GatePuzzle4";
+import PostPuzzle4Scene from "./components/PostPuzzle4Scene";
 
-// Optional: import PostPuzzle3Scene and LogicPathScene if you have them
+
+
 
 function App() {
   const [notation, setNotation] = useState<"symbolic" | "electronic" | null>(null);
-  const [stage, setStage] = useState<
-    | "select"
-    | "intro"
-    | "puzzle1"
-    | "postPuzzle1"
-    | "puzzle2"
-    | "postPuzzle2"
-    | "puzzle3"
-    | "postPuzzle3"
-    | "logicPath"
-  >("select");
+const [stage, setStage] = useState<
+  | "select"
+  | "intro"
+  | "puzzle1"
+  | "postPuzzle1"
+  | "puzzle2"
+  | "postPuzzle2"
+  | "puzzle3"
+  | "postPuzzle3"
+  | "puzzle4"
+  | "postPuzzle4"
+  | "logicPath"
+>("select");
+
 
   const [isGregFriend, setIsGregFriend] = useState<boolean | null>(null); // 🐊 Track Greg friendship
 
@@ -71,10 +77,20 @@ function App() {
 
 {stage === "postPuzzle3" && (
   <PostPuzzle3Scene
-    onContinue={() => setStage("logicPath")}
+    onContinue={() => setStage("puzzle4")}
     isGregFriend={isGregFriend}
   />
 )}
+
+
+{stage === "puzzle4" && (
+  <GatePuzzle4 onSolve={() => setStage("postPuzzle4")} notation={notation!} />
+)}
+
+{stage === "postPuzzle4" && (
+  <PostPuzzle4Scene onContinue={() => setStage("logicPath")} />
+)}
+
 
 
 
