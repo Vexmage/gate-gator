@@ -19,7 +19,11 @@ function App() {
     <>
       {stage === "select" && <NotationSelector onSelect={handleNotationSelect} />}
       {stage === "intro" && notation && <IntroSequence onContinue={goToPuzzle} notation={notation} />}
-      {stage === "puzzle1" && <GatePuzzle1 onSolve={() => setStage("postPuzzle1")} />}
+      {stage === "puzzle1" && <GatePuzzle1
+  onSolve={() => setStage("postPuzzle1")}
+  notation={notation!}
+/>
+}
       {stage === "postPuzzle1" && <PostPuzzle1Scene onContinue={() => setStage("puzzle2")} />}
       {stage === "puzzle2" && (
         <div className="min-h-screen bg-gray-800 text-white flex justify-center items-center">
