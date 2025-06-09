@@ -5,25 +5,25 @@ interface Props {
   notation: "symbolic" | "electronic";
 }
 
-const GatePuzzle4 = ({ onSolve, notation }: Props) => {
+const GatePuzzle6 = ({ onSolve, notation }: Props) => {
   const [inputA, setInputA] = useState(false);
   const [inputB, setInputB] = useState(false);
 
-  const output = !(inputA && inputB); // NAND logic
+  const output = (inputA && inputB) || (!inputA && !inputB); // XNOR logic
 
   return (
     <div className="min-h-screen bg-black text-lime-300 font-mono flex flex-col items-center justify-center p-8 tracking-wide">
       <h1 className="text-2xl md:text-3xl font-bold mb-6 border-b border-lime-500 pb-2">
-        Logic Puzzle 4: NAND Gate
+        Logic Puzzle 6: XNOR Gate
       </h1>
 
       <div className="mb-6 text-center max-w-xl">
         <p className="mb-2">
-          To unlock the gate, at least one input must be <strong>false</strong>.
+          To unlock this gate, the inputs must be <strong>equal</strong>: both <code>true</code> or both <code>false</code>.
         </p>
         <p>
           The gate uses a{" "}
-          <code className="text-lime-400">NAND (Not AND)</code> logic gate.
+          <code className="text-lime-400">XNOR (Exclusive NOR)</code> logic gate.
         </p>
       </div>
 
@@ -49,7 +49,7 @@ const GatePuzzle4 = ({ onSolve, notation }: Props) => {
             <pre className="whitespace-pre text-lime-300 text-sm">
 {`          ┌──────────┐
 ${inputA ? "TRUE " : "FALSE"} ───▶│          │
-                     │  NAND    │──▶ ${output ? "TRUE" : "FALSE"}
+                     │  XNOR    │──▶ ${output ? "TRUE" : "FALSE"}
 ${inputB ? "TRUE " : "FALSE"} ───▶│          │
           └──────────┘`}
             </pre>
@@ -60,7 +60,7 @@ ${inputB ? "TRUE " : "FALSE"} ───▶│          │
   Q := ${inputB ? "⊤ (TRUE)" : "⊥ (FALSE)"}
 
 Expression:
-  ¬(P ∧ Q) ⊢ ${output ? "⊤ (TRUE)" : "⊥ (FALSE)"}`}
+  (P ∧ Q) ∨ (¬P ∧ ¬Q) ⊢ ${output ? "⊤ (TRUE)" : "⊥ (FALSE)"}`}
             </pre>
           )}
         </div>
@@ -102,4 +102,4 @@ Expression:
   );
 };
 
-export default GatePuzzle4;
+export default GatePuzzle6;
