@@ -11,7 +11,8 @@ import GatePuzzle4 from "./components/GatePuzzle4";
 import PostPuzzle4Scene from "./components/PostPuzzle4Scene";
 import GatePuzzle5 from "./components/GatePuzzle5";
 import PostPuzzle5Scene from "./components/PostPuzzle5Scene";
-import GatePuzzle6 from "./components/GatePuzzle6"; // ✅ NEW IMPORT
+import GatePuzzle6 from "./components/GatePuzzle6"; 
+import PostPuzzle6Scene from "./components/PostPuzzle6Scene";
 
 function App() {
   const [notation, setNotation] = useState<"symbolic" | "electronic" | null>(null);
@@ -29,6 +30,7 @@ function App() {
     | "puzzle5"
     | "postPuzzle5"
     | "puzzle6"
+    | "postPuzzle6"
     | "logicPath"
   >("select");
 
@@ -87,9 +89,16 @@ function App() {
       {stage === "postPuzzle5" && (
         <PostPuzzle5Scene onContinue={() => setStage("puzzle6")} />
       )}
-      {stage === "puzzle6" && (
-        <GatePuzzle6 onSolve={() => setStage("logicPath")} notation={notation!} />
-      )}
+{stage === "puzzle6" && (
+  <GatePuzzle6 onSolve={() => setStage("postPuzzle6")} notation={notation!} />
+)}
+      {stage === "postPuzzle6" && (
+  <PostPuzzle6Scene
+    isGregFriend={isGregFriend}
+    onContinue={() => setStage("logicPath")}
+  />
+)}
+
       {stage === "logicPath" && (
         <div className="min-h-screen bg-black text-lime-300 flex items-center justify-center font-mono p-8 text-center">
           <p>Welcome to the deeper logic path... (coming soon)</p>
