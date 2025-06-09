@@ -1,5 +1,3 @@
-// src/components/PostPuzzle4Scene.tsx
-
 interface Props {
   onContinue: () => void;
 }
@@ -29,7 +27,7 @@ const PostPuzzle4Scene = ({ onContinue }: Props) => {
         onClick={onContinue}
         className="mt-4 px-6 py-2 border-2 border-lime-400 bg-green-800 text-black font-bold rounded-sm hover:bg-green-600 transition-all"
       >
-        Step into the Deeper Path
+        Continue to the Next Gate
       </button>
     </div>
   );

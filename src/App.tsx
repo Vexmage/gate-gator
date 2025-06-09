@@ -26,6 +26,7 @@ const [stage, setStage] = useState<
   | "postPuzzle3"
   | "puzzle4"
   | "postPuzzle4"
+  | "puzzle5"
   | "logicPath"
 >("select");
 
@@ -88,7 +89,12 @@ const [stage, setStage] = useState<
 )}
 
 {stage === "postPuzzle4" && (
-  <PostPuzzle4Scene onContinue={() => setStage("logicPath")} />
+  <PostPuzzle4Scene onContinue={() => setStage("puzzle5")} />
+)}
+
+{stage === "puzzle5" && (
+<GatePuzzle5 onSolve={() => setStage("postPuzzle5")} notation={notation!} />
+
 )}
 
 

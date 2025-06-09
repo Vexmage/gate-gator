@@ -36,10 +36,10 @@ const PostPuzzle3Scene = ({ onContinue, isGregFriend }: Props) => {
               <>
                 <p>“User has passed third gate. Negation logic processed successfully.”</p>
                 <p>“Further gates pending: XOR. NOR. XNOR. Completion will unlock central directive access.”</p>
-                <p>“Standby: teleport platform prepared.”</p>
+                <p>“Standby: Gate prepared.”</p>
               </>
             )}
-            <p>He gestures toward a glowing platform. “Proceed when ready.”</p>
+            <p>He gestures toward the next gate. “Proceed when ready.”</p>
           </div>
         )}
 
