@@ -47,7 +47,7 @@ const PostPuzzle3Scene = ({ onContinue, isGregFriend }: Props) => {
           onClick={onContinue}
           className="mt-6 px-6 py-2 border-2 border-lime-400 bg-green-800 text-black font-bold rounded-sm hover:bg-green-600 transition-all"
         >
-          Step on Telepad
+          Approach Next Gate
         </button>
       </div>
     </div>

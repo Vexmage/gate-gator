@@ -10,6 +10,7 @@ import PostPuzzle3Scene from "./components/PostPuzzle3Scene";
 import GatePuzzle4 from "./components/GatePuzzle4";
 import PostPuzzle4Scene from "./components/PostPuzzle4Scene";
 import GatePuzzle5 from "./components/GatePuzzle5";
+import PostPuzzle5Scene from "./components/PostPuzzle5Scene";
 
 
 
@@ -28,6 +29,8 @@ const [stage, setStage] = useState<
   | "puzzle4"
   | "postPuzzle4"
   | "puzzle5"
+  | "postPuzzle5"
+  | "puzzle6"
   | "logicPath"
 >("select");
 
@@ -98,6 +101,11 @@ const [stage, setStage] = useState<
 <GatePuzzle5 onSolve={() => setStage("postPuzzle5")} notation={notation!} />
 
 )}
+
+{stage === "postPuzzle5" && (
+  <PostPuzzle5Scene onContinue={() => setStage("puzzle6")} />
+)}
+
 
 
 
