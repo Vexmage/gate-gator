@@ -1,12 +1,38 @@
-// src/components/IntroScreen.tsx
+import { useEffect, useState } from "react";
+
 interface Props {
   onStart: () => void;
   onAbout: () => void;
 }
 
+const frameSequence = [
+  "gate-gator.png",
+  "gate-gator.png",
+  "gate-gator.png",
+  "gate-gator.png",
+  "gate-gator2.png",
+];
+
 const IntroScreen = ({ onStart, onAbout }: Props) => {
+  const [frameIndex, setFrameIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFrameIndex((prev) => (prev + 1) % frameSequence.length);
+    }, 300); // ~5 FPS blinking effect
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentFrame = frameSequence[frameIndex];
+
   return (
     <div className="min-h-screen bg-black text-lime-300 font-mono flex flex-col items-center justify-center text-center p-8 tracking-wide">
+      <img
+        src={`/images/${currentFrame}`}
+        alt="Gate Gator"
+        className="w-64 h-64 mb-8"
+      />
+
       <h1 className="text-4xl md:text-5xl font-bold mb-4 border-b border-lime-500 pb-2">
         🧪 GATE GATOR
       </h1>
