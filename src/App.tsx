@@ -9,6 +9,7 @@ import GatePuzzle3 from "./components/GatePuzzle3";
 import PostPuzzle3Scene from "./components/PostPuzzle3Scene";
 import GatePuzzle4 from "./components/GatePuzzle4";
 import PostPuzzle4Scene from "./components/PostPuzzle4Scene";
+import GatePuzzle5 from "./components/GatePuzzle5";
 
 
 
@@ -29,6 +30,7 @@ const [stage, setStage] = useState<
   | "puzzle5"
   | "logicPath"
 >("select");
+
 
 
   const [isGregFriend, setIsGregFriend] = useState<boolean | null>(null); // 🐊 Track Greg friendship
