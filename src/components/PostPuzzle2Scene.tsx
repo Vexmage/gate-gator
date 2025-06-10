@@ -1,4 +1,6 @@
 import { useState } from "react";
+import RoomGrid from "./RoomGrid";
+import HallwayGrid from "./HallwayGrid";
 
 interface Props {
   onChoosePath: (path: string) => void;
@@ -10,6 +12,7 @@ const PostPuzzle2Scene = ({ onChoosePath, doorBUnlocked }: Props) => {
 
   return (
     <div className="min-h-screen bg-black text-lime-300 font-mono p-8 flex flex-col items-center justify-center">
+      <HallwayGrid />
       <div className="max-w-2xl space-y-4 text-center">
         <p>The gate opens with a heavy thunk and hissing decompress.</p>
         <p>You step into a narrow, dimly lit hallway.</p>

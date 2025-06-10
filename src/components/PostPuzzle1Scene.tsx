@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RoomGrid from "./RoomGrid";
+import CellRoomGrid from "./CellRoomGrid";
 
 interface Props {
   onContinue: () => void;
@@ -25,7 +25,7 @@ const characters = [
   return (
     <div className="min-h-screen bg-black text-lime-300 font-mono flex flex-col items-center justify-center p-8">
       <div className="max-w-xl text-center space-y-4">
-        <RoomGrid width={5} height={5} characters={characters} />
+        <CellRoomGrid width={5} height={5} characters={characters} />
 
         <p>The cell door unlocks with a click and a hiss of air.</p>
         <p>GateGator blinks, clearer now. “I knew you could do it,” he says.</p>
