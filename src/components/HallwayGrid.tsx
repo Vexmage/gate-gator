@@ -1,3 +1,4 @@
+// HallwayGrid.tsx
 import "./RoomGrid.css";
 
 interface Entity {
@@ -7,23 +8,24 @@ interface Entity {
 }
 
 const HallwayGrid = () => {
-  const gridSize = 5;
+  const gridWidth = 5;
+  const gridHeight = 7;
 
-  const player: Entity = { emoji: "🧑‍🦱", x: 2, y: 3 };
-  const doorA: Entity = { emoji: "🟩", x: 1, y: 2 };
-  const doorB: Entity = { emoji: "🟨", x: 2, y: 2 };
-  const doorC: Entity = { emoji: "🔒", x: 3, y: 2 };
-
-  const entities = [player, doorA, doorB, doorC];
+  const entities: Entity[] = [
+    { emoji: "🧑‍🦱", x: 2, y: 0 }, // Player at bottom of hall
+    { emoji: "🚪", x: 4, y: 1 },   // Door A – right side, row 1
+    { emoji: "🚪", x: 0, y: 3 },   // Door B – left side, row 3
+    { emoji: "🔒", x: 2, y: 6 },   // Door C – end of hall
+  ];
 
   const cells: JSX.Element[] = [];
 
-  for (let y = 0; y < gridSize; y++) {
-    for (let x = 0; x < gridSize; x++) {
-      const match = entities.find((e) => e.x === x && e.y === y);
+  for (let y = 0; y < gridHeight; y++) {
+    for (let x = 0; x < gridWidth; x++) {
+      const entity = entities.find(e => e.x === x && e.y === y);
       cells.push(
         <div key={`${x}-${y}`} className="cell">
-          {match?.emoji || "·"}
+          {entity ? entity.emoji : "·"}
         </div>
       );
     }
@@ -31,7 +33,15 @@ const HallwayGrid = () => {
 
   return (
     <div className="grid-wrapper">
-      <div className="grid">{cells}</div>
+      <div
+        className="grid"
+        style={{
+          gridTemplateColumns: `repeat(${gridWidth}, 1.5rem)`,
+          gridTemplateRows: `repeat(${gridHeight}, 1.5rem)`,
+        }}
+      >
+        {cells}
+      </div>
     </div>
   );
 };
