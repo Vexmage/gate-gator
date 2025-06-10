@@ -16,7 +16,8 @@ import PostPuzzle5Scene from "./components/PostPuzzle5Scene";
 import GatePuzzle6 from "./components/GatePuzzle6";
 import PostPuzzle6Scene from "./components/PostPuzzle6Scene";
 import GatePuzzle7 from "./components/GatePuzzle7";
-
+import PostPuzzle7Scene from "./components/PostPuzzle7Scene";
+import GatePuzzle8 from "./components/GatePuzzle8";
 
 function App() {
   const [notation, setNotation] = useState<"symbolic" | "electronic" | null>(null);
@@ -40,6 +41,7 @@ function App() {
     | "puzzle7"
     | "postPuzzle7"
     | "unknownPath"
+    | "puzzle8"
   >("introScreen");
 
   const [isGregFriend, setIsGregFriend] = useState<boolean | null>(null);
@@ -136,11 +138,13 @@ function App() {
 )}
 
 {stage === "postPuzzle7" && (
-  <div className="min-h-screen bg-black text-lime-300 font-mono flex items-center justify-center p-10 text-center">
-    <p>You’ve completed Gate Puzzle 7! More challenges await beyond Door B.</p>
-  </div>
+  <PostPuzzle7Scene onContinue={() => setStage("puzzle8")} />
 )}
 
+
+{stage === "puzzle8" && (
+  <GatePuzzle8 onSolve={() => setStage("unknownPath")} notation={notation!} />
+)}
 
       {stage === "unknownPath" && (
         <div className="min-h-screen bg-black text-yellow-300 flex items-center justify-center font-mono p-8 text-center">
