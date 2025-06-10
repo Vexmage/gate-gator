@@ -1,4 +1,5 @@
 import { useState } from "react";
+import RoomGrid from "./RoomGrid";
 
 interface Props {
   onContinue: () => void;
@@ -14,9 +15,18 @@ const PostPuzzle1Scene = ({ onContinue, setIsGregFriend }: Props) => {
     setIsGregFriend(choice === "yes");
   };
 
+const characters = [
+  { name: "You", sprite: "🧑", x: 1, y: 2 },
+  { name: "GREG", sprite: "🐊", x: 2, y: 2 },
+  { name: "Gate", sprite: "🚪", x: 3, y: 2 },
+];
+
+
   return (
     <div className="min-h-screen bg-black text-lime-300 font-mono flex flex-col items-center justify-center p-8">
       <div className="max-w-xl text-center space-y-4">
+        <RoomGrid width={5} height={5} characters={characters} />
+
         <p>The cell door unlocks with a click and a hiss of air.</p>
         <p>GateGator blinks, clearer now. “I knew you could do it,” he says.</p>
         <p>“Another gate seals this room. It's beyond me now... but you...”</p>
