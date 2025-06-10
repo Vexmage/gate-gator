@@ -15,6 +15,8 @@ import GatePuzzle5 from "./components/GatePuzzle5";
 import PostPuzzle5Scene from "./components/PostPuzzle5Scene";
 import GatePuzzle6 from "./components/GatePuzzle6";
 import PostPuzzle6Scene from "./components/PostPuzzle6Scene";
+import GatePuzzle7 from "./components/GatePuzzle7";
+
 
 function App() {
   const [notation, setNotation] = useState<"symbolic" | "electronic" | null>(null);
@@ -35,6 +37,8 @@ function App() {
     | "postPuzzle5"
     | "puzzle6"
     | "postPuzzle6"
+    | "puzzle7"
+    | "postPuzzle7"
     | "unknownPath"
   >("introScreen");
 
@@ -83,8 +87,9 @@ function App() {
               if (doorBUnlocked) return; // logic path already done
               setStage("puzzle3");
             } else if (path === "unknown" && doorBUnlocked) {
-              setStage("unknownPath");
+              setStage("puzzle7");
             }
+
           }}
         />
       )}
@@ -125,6 +130,17 @@ function App() {
           }}
         />
       )}
+
+      {stage === "puzzle7" && (
+  <GatePuzzle7 onSolve={() => setStage("postPuzzle7")} notation={notation!} />
+)}
+
+{stage === "postPuzzle7" && (
+  <div className="min-h-screen bg-black text-lime-300 font-mono flex items-center justify-center p-10 text-center">
+    <p>You’ve completed Gate Puzzle 7! More challenges await beyond Door B.</p>
+  </div>
+)}
+
 
       {stage === "unknownPath" && (
         <div className="min-h-screen bg-black text-yellow-300 flex items-center justify-center font-mono p-8 text-center">
