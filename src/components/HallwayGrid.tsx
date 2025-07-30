@@ -20,7 +20,7 @@ const HallwayGrid = () => {
     { emoji: "🔒", x: 2, y: 6 },   // Door C – end of hall
   ];
 
-  const cells: JSX.Element[] = [];
+  const cells: React.ReactElement[] = [];
 
   for (let y = 0; y < gridHeight; y++) {
     for (let x = 0; x < gridWidth; x++) {

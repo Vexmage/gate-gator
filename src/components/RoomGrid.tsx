@@ -28,7 +28,7 @@ const RoomGrid = () => {
   const greg: Entity = { emoji: "🐊", x: 2, y: gregY, className: isBouncing ? "bounce" : "" };
   const door: Entity = { emoji: "🚪", x: 3, y: 2 };
 
-  const cells: JSX.Element[] = [];
+  const cells: React.ReactElement[] = [];
 
   for (let y = 0; y < gridSize; y++) {
     for (let x = 0; x < gridSize; x++) {

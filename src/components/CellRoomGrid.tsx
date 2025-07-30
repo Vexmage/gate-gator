@@ -1,18 +1,21 @@
-
-
+// CellRoomGrid.tsx
 import { useState, useEffect } from "react";
 import "./RoomGrid.css";
 
-
-
 interface Entity {
-  emoji: string;
+  name: string;
+  sprite: string;
   x: number;
   y: number;
-  className?: string;
 }
 
-const CellRoomGrid = () => {
+interface CellRoomGridProps {
+  width: number;
+  height: number;
+  characters: Entity[];
+}
+
+const CellRoomGrid = ({ width, height, characters }: CellRoomGridProps) => {
   const [gregY, setGregY] = useState(2);
   const [isBouncing, setIsBouncing] = useState(true);
 
@@ -24,28 +27,24 @@ const CellRoomGrid = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const gridSize = 5;
-  const player: Entity = { emoji: "🧑‍🦱", x: 1, y: 2 };
-  const greg: Entity = {
-    emoji: "🐊",
-    x: 2,
-    y: gregY,
-    className: isBouncing ? "bounce" : "",
-  };
-  const door: Entity = { emoji: "🚪", x: 3, y: 2 };
+  const cells: React.ReactElement[] = [];
 
-  const cells: JSX.Element[] = [];
 
-  for (let y = 0; y < gridSize; y++) {
-    for (let x = 0; x < gridSize; x++) {
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
       let symbol = "·";
       let extraClass = "";
 
-      if (x === player.x && y === player.y) symbol = player.emoji;
-      else if (x === greg.x && y === greg.y) {
-        symbol = greg.emoji;
-        extraClass = greg.className ?? "";
-      } else if (x === door.x && y === door.y) symbol = door.emoji;
+      for (const char of characters) {
+        const isGreg = char.name.toLowerCase() === "greg";
+        const sprite = isGreg && isBouncing ? "🐊" : char.sprite;
+
+        if (char.x === x && char.y === y) {
+          symbol = sprite;
+          extraClass = isGreg && isBouncing ? "bounce" : "";
+          break;
+        }
+      }
 
       cells.push(
         <div key={`${x}-${y}`} className={`cell ${extraClass}`}>
