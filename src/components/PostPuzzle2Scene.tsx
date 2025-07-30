@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RoomGrid from "./RoomGrid";
+
 import HallwayGrid from "./HallwayGrid";
 
 interface Props {
