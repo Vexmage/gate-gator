@@ -1,5 +1,5 @@
 // CellRoomGrid.tsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./RoomGrid.css";
 
 interface Entity {
@@ -16,16 +16,9 @@ interface CellRoomGridProps {
 }
 
 const CellRoomGrid = ({ width, height, characters }: CellRoomGridProps) => {
-  const [gregY, setGregY] = useState(2);
-  const [isBouncing, setIsBouncing] = useState(true);
+  const [isBouncing] = useState(true);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsBouncing(false);
-      setGregY((prev) => Math.max(prev - 1, 0));
-    }, 1200);
-    return () => clearTimeout(timeout);
-  }, []);
+
 
   const cells: React.ReactElement[] = [];
 

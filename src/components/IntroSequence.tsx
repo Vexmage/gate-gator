@@ -23,7 +23,7 @@ const playerText = `You awaken in a sparse cell room. Peering through the bars i
 his form flickering slightly, as though part of him isn't quite here. The floor is cold and damp. 
 Before you lies a control panel — a puzzle you don’t recognize... but know you must solve.`;
 
-const IntroSequence = ({ onContinue, notation }: Props) => {
+const IntroSequence = ({ onContinue }: Props) => {
   const [currentLine, setCurrentLine] = useState(0);
   const [showNarration, setShowNarration] = useState(false);
 
