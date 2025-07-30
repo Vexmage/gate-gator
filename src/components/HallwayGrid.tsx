@@ -1,4 +1,6 @@
 // HallwayGrid.tsx
+import React from 'react';
+
 import "./RoomGrid.css";
 
 interface Entity {
