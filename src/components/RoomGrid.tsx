@@ -1,5 +1,5 @@
 // RoomGrid.tsx
-import React from "react";
+
 import { useState, useEffect } from "react";
 import "./RoomGrid.css"; // for animation styles
 

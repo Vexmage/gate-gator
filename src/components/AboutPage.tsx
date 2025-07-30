@@ -1,5 +1,4 @@
 // src/components/AboutPage.tsx
-import React from "react";
 
 interface Props {
   onContinue: () => void;
